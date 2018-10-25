@@ -1,0 +1,274 @@
+package com.cg.eis.bean;
+
+public class Employee 
+{
+	public static  int id;
+	public static  String name;
+	public static String designation;
+	public static String insurance;
+	public static double salary;
+	public Employee(int i,String n,String d,double s)
+	{
+		id=i;
+		name=n;
+		designation=d;
+		
+		salary=s;
+	}
+}
+
+
+------------------------------------
+package com.cg.eis.exception;
+import  com.cg.eis.bean.Employee;
+import com.cg.eis.service.Service;
+public class EmployeeException{{
+
+	
+
+	
+	try
+	{
+		if(Employee.salary<3000)
+		{
+			throw new balCheck();
+		}
+	}
+	catch(Exception e)
+	{
+		balCheck b=new balCheck();
+		b.check();
+	}
+	
+}
+public class balCheck extends Exception
+{
+	public void check()
+	{
+		System.out.println("Balance is less than 3000");
+	}
+}}
+
+
+------------------------
+
+package com.cg.eis.pl;
+import java.util.Scanner;
+import com.cg.eis.exception.EmployeeException;
+import  com.cg.eis.bean.Employee;
+import com.cg.eis.service.Service;
+public class EmployeeMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter id of the employee:");
+		int id=sc.nextInt();
+		System.out.println("Enter name of the employee:");
+		String name=sc.next();
+		//System.out.println("Enter designation of the employee:\n System Associate \nProgrammer \n Manager \n Clerk");
+		//String des=sc.next();
+		System.out.println("Enter salary of the employee:");
+		long sal=sc.nextLong();
+		Employee e=new Employee(id,name,"Programmer",sal);
+		String n=e.designation;
+		double d=e.salary;
+		
+		Service s=new Service();
+		s.insuranceScheme(d,n);
+		s.display();
+		EmployeeException b=new EmployeeException();
+		
+		
+		
+		
+		
+	}
+}
+----------------------
+package com.cg.eis.service;
+import  com.cg.eis.bean.Employee;
+interface EmployeeService
+{
+	
+	void insuranceScheme(double s,String s1);
+	void display();
+}
+public class Service implements EmployeeService
+{
+	double s=Employee.salary;
+	String s1=Employee.designation;
+	//String s2=Employee.insurance;
+	public void insuranceScheme(double s,String s1)
+	{
+		
+		
+		if(s>5000 && s<20000 && s1=="System Associate")
+		{	
+			Employee.insurance="Scheme A";
+					 
+			 
+		}
+		else if(s>=20000 && s<40000 && s1=="Programmer")
+		{
+			Employee.insurance="Scheme B";
+			
+		}
+		else if(s>=40000 && s1=="Manager")
+		{
+			Employee.insurance="Scheme C";
+		}
+		else if(s<5000 && s1=="Clerk")
+		{
+			Employee.insurance="No scheme";
+		}
+		else
+			Employee.insurance="Your profile is not applicable for insurance any scheme";
+	}
+	public void display()
+	{
+		System.out.println("Person Details:");
+		System.out.println("---------------------");
+		System.out.println(" Name: "+Employee.name);
+		
+		System.out.println("Id: "+Employee.id);
+		System.out.println("Designation : "+Employee.designation);
+		System.out.println("Salary: "+Employee.salary);
+		System.out.println("Insurance Scheme: "+Employee.insurance);
+		
+		
+	}
+	
+}
+
+------------------------------
+abstract class Account {
+
+long accNum;
+
+double balance=500;
+
+String accHolder;
+
+ 
+
+void setDeposit(double d){
+
+balance+=d;
+
+ 
+
+}
+
+abstract void getWithdraw(double w);
+
+double getBalance()
+{
+	return balance;
+}
+
+/*void display()
+{
+	System.out.println(accNum+" "+balance+" "+accHolder);
+}*/
+public String toString()
+{//overriding the toString() method  
+	  return accNum+" "+balance+" "+accHolder;  
+}
+ }
+class AbstractClass extends Account
+{
+	String name;
+	float age;
+	AbstractClass(long aNo,  String aHo, float ag)
+
+	{
+
+	accNum=aNo;
+
+
+
+	accHolder=aHo;
+
+	age=ag;
+
+	}
+	
+	void getWithdraw(double w)
+	{
+
+		if(balance>=500){
+
+		balance-=w;
+
+		}
+
+		else System.out.println("Insufficient balance.");
+
+
+
+
+		}
+	public static void main(String[] args) 
+	{
+
+		// TODO Auto-generated method stub
+
+		AbstractClass a=new AbstractClass(100001L,"Smith",45);
+
+		AbstractClass b=new AbstractClass(100002L,"Kethy",40);
+		a.setDeposit(2000);
+		b.setDeposit(3000);
+		
+
+		a.getBalance();
+
+		b.getBalance();
+		a.getWithdraw(200);
+		 a.getBalance();
+
+		System.out.println("\nUpdated BalanceSheet\n--------------------");
+		
+		//a.display();
+
+		//b.display();
+		System.out.println(a.toString());
+		System.out.println(b.toString());
+	}
+
+	
+
+
+}
+	
+ 
+
+
+------------------------------------------
+
+interface asus
+{
+	void camera();
+}
+class asusZen2 implements asus
+{
+
+	@Override
+	public void camera() {
+		// TODO Auto-generated method stub
+		System.out.println("Asus mobile..........");
+	}
+	
+}
+public class Annotation {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		asusZen2 a=new asusZen2();
+		a.camera();
+	}
+
+}
+
+
+
