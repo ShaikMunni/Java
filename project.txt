@@ -27,10 +27,8 @@ seat_numbers number,
  src_city varchar2(10), 
 dest_city varchar2(10)
 );
-
-
-
-
+create sequence id_seq start with 100;
+create sequence seatnumber_seq start with 100;
 
 create table FlightInformation(
 flightno varchar2(5),
@@ -71,3 +69,69 @@ insert into time1 values('19-sep-2019','19-sep-2018 08:40:00');
 create table p(t interval day to second);
 
 insert into p(t) values(to_dsinterval('0 07:39:33'));
+
+
+
+
+
+
+
+
+
+<%
+
+
+String srccity =request.getParameter("src");
+String destcity =request.getParameter("dest");
+String passengers =request.getParameter("passengers");
+int number=Integer.parseInt(passengers);
+String classtype =request.getParameter("class");
+Class.forName("oracle.jdbc.driver.OracleDriver");
+String url="jdbc:oracle:thin:@localhost:1521:XE";
+String user="system";
+String pass="Capgemini123";
+Connection con =DriverManager.getConnection(url,user,pass);
+PreparedStatement ps=con.prepareStatement("insert into booking_info(Booking_id,src_city,dest_city,no_of_passengers,class_type) values(id_seq.nextVal,?,?,?,?)");
+ps.setString(1,srccity);
+ps.setString(2, destcity);
+ps.setInt(3,number);
+ps.setString(4,classtype);
+int n=ps.executeUpdate();
+if(n>0)
+{
+%>
+hello
+<!-- <jsp:include page="payment.jsp"></jsp:include> --> 
+<%
+}%>
+
+
+
+
+
+
+
+
+
+
+
+String srccity =request.getParameter("src");
+String destcity =request.getParameter("dest");
+String passengers =request.getParameter("passengers");
+int number=Integer.parseInt(passengers);
+String classtype =request.getParameter("class");
+String credit=request.getParameter("name");
+String mail=request.getParameter("email");
+Class.forName("oracle.jdbc.driver.OracleDriver");
+String url="jdbc:oracle:thin:@localhost:1521:XE";
+String user="system";
+String pass="Capgemini123";
+Connection con =DriverManager.getConnection(url,user,pass);
+PreparedStatement ps=con.prepareStatement("insert into booking_info(Booking_id,cust_email,no_of_passengers,class_type,total_fare,seat_numbers,CreditCard_info ,src_city,dest_city) values(id_seq.nextVal,?,?,?,?,seatnumber_seq.nextval,?,?,?)");
+ps.setString(1,mail);
+ps.setString(2, number);
+ps.setInt(3,classtype);
+ps.setString(4,1000);
+ps.setString
+int n=ps.executeUpdate();
+if(n>0)
