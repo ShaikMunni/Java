@@ -1,0 +1,73 @@
+create table users(
+username varchar2(30),
+password varchar2(30),
+role varchar2(30),
+mobile_no number
+);
+
+
+
+insert into users values('manee','123','user','9879879870');
+
+
+
+
+
+
+
+
+create table booking_info(
+Booking_id varchar2(5), 
+cust_email varchar2(20),
+ no_of_passengers number, 
+class_type varchar2(10), 
+total_fare number(5,2), 
+seat_numbers number,
+ CreditCard_info varchar2(10),
+ src_city varchar2(10), 
+dest_city varchar2(10)
+);
+
+
+
+
+
+create table FlightInformation(
+flightno varchar2(5),
+airline varchar2(10),
+dep_city varchar2(10),
+arr_city varchar2(10),
+dep_date date,
+arr_date date,
+dep_time interval day to second,
+arr_time interval day to second,
+FirstSeats number,
+FirstSeatFare  number(7,2),
+BussSeats number,
+BussSeatsFare number(7,2)
+);
+
+ insert into FlightInformation values('ad123','asdas','hyd','vizag',to_date('19-sep-18','dd-mon-yy'),to_date('30-nov-18','dd-mon-yy'),to_dsinterval('0 07:39:33'),
+to_dsinterval('0 09:39:33'),4,98789.90,4,68768.90);
+insert into FlightInformation values('ad123','asdas','hyd','vizag',to_date('19-sep-18','dd-mon-yy'),to_date('30-nov-18','dd-mon-yy'),to_dsinterval('0 07:39:33'),
+to_dsinterval('0 09:39:33'),4,98789.90,4,68768.90);
+
+
+create table t1 (time_of_day interval day (0) to second(0));
+
+insert into t1 values (TO_DSINTERVAL('0 23:59:59'));
+select date '2009-05-13'+time_of_day
+from   t1;
+
+
+
+create table time1(
+d date,
+time timestamp);
+insert into time1 values('19-sep-2019','19-sep-2018 08:40:00');
+
+
+
+create table p(t interval day to second);
+
+insert into p(t) values(to_dsinterval('0 07:39:33'));
